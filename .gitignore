@@ -1,0 +1,25 @@
+# Python virtual environments
+.venv/
+.venv-*/
+.venv_old/
+venv/
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# Frontend dependencies and builds
+node_modules/
+dist/
+
+# Project data
+data/
+
+# System files
+.DS_Store
+.agents/

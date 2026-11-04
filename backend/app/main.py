@@ -80,14 +80,24 @@ async def lifespan(_: FastAPI):
 
 
 app = FastAPI(title="Doris CSV Cleaner", version="0.1.0", lifespan=lifespan)
+
+allowed_origins = [
+    "http://127.0.0.1:5173",
+    "http://localhost:5173",
+]
+
+frontend_origin = os.environ.get("FRONTEND_ORIGIN")
+
+if frontend_origin:
+    allowed_origins.append(frontend_origin.rstrip("/"))
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://127.0.0.1:5173", "http://localhost:5173"],
+    allow_origins=allowed_origins,
     allow_credentials=False,
     allow_methods=["GET", "POST", "PUT", "DELETE"],
     allow_headers=["*"],
 )
-
 
 class SettingsInput(BaseModel):
     trim_whitespace: bool = True
